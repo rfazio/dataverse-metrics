@@ -34,7 +34,7 @@ jobs:
           period_begin: ${{ github.event.inputs.period_begin }}
           period_end: ${{ github.event.inputs.period_end }}
         run: Rscript -e 'rmarkdown::render("dataverse_metrics.Rmd", "all", output_dir="report")'
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: dataverse-metrics
           path: report/
