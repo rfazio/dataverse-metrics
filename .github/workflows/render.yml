@@ -26,6 +26,8 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
       - name: Install extra LaTeX packages
         run: sudo apt install texlive-latex-recommended
+      - name: Install required R packages 
+        run:  Rscript -e 'install.packages(c( "rmarkdown", "httr", "jsonlite", "xml2", "dplyr", "ggplot2", "lubridate", "tidyr", "stringr" ))'  
       - run: mkdir report/
       - name: Render documents
         env:
