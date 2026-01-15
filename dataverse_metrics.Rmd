@@ -55,7 +55,12 @@ if (file.exists("deposits.rds")) {
 } else { # actually scrape
   deposits <- deposits_get(dataverse_host)
   saveRDS(deposits, "deposits.rds")
-  
+  # Fix inconsistent subject types 
+  deposits$subjects <- lapply(deposits$subjects, function(x) { 
+    if (is.null(x) || is.logical(x)) return(NA_character_) 
+        as.character(x) 
+   })
+
   projects <- content(GET(paste0(dataverse, "/uniquedownloads/monthly")))
   projects <- bind_rows(projects$data)
   saveRDS(projects, "projects.rds")
